@@ -1,0 +1,26 @@
+STEPS
+
+1. Build intial files and database
+
+2. Research for displaying LAST time/date
+    Implement time/date by...
+    - in login.php > login function
+    - Grab time/date BEFORE log in -  not updated to newest login yet
+    - Log in - display last login 
+    - Update timestamp to newest login 
+
+4. Research for account lock
+    Implement account lock by...
+    - Create DB column for login attempts
+    - When attempt is made, before log in, check if locked (3 attempts) or not ( < 3 attempts)
+    - if locked, ACCESS DENIED
+    - If not locked, log in
+    - if unsuccessful, UPDATE +1 attempt in db
+
+6. Research for counting successful logins
+    Implement counting successful logins by...
+    - Create new db column to track logins
+    - Log in
+    - check if log in successful
+    - run function that updates +1 to login count column w/ every successful login
+    - echo "___ Successful Logins!" to dashboard similar to name echo using SESSION
