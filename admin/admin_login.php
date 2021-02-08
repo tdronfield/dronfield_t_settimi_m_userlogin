@@ -14,7 +14,7 @@ if(isset($_POST['submit'])) {
         $result = login($username, $password, $ip);
         $message = $result;
     } else {
-        $message = 'Please fill out require fields';
+        $message = 'Please fill out required fields';
     }
 }
 ?>
@@ -35,9 +35,10 @@ if(isset($_POST['submit'])) {
     <input id="username" type="text" name="username" value="">
     <br><br>
     <label for="password">Password:</label>
-    <input id="password" type="text" name="password" value="">
+    <input id="password" type="text" name="password" value=""> <!-- change type="text" to "password" -->
     <br><br>
     <button type="submit" name="submit">Show me the money</button>
     </form>
 </body>
 </html>
+

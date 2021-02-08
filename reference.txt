@@ -17,6 +17,9 @@ STEPS
     - If not locked, log in
     - if unsuccessful, UPDATE +1 attempt in db
 
+    https://webcheatsheet.com/php/blocking_system_access.php
+    https://www.youtube.com/watch?v=OY5OxqMI3WA 
+
 6. Research for counting successful logins
     Implement counting successful logins by...
     - Create new db column to track logins
@@ -24,3 +27,5 @@ STEPS
     - check if log in successful
     - run function that updates +1 to login count column w/ every successful login
     - echo "___ Successful Logins!" to dashboard similar to name echo using SESSION
+
+    https://www.youtube.com/watch?v=0EsefXifM0k

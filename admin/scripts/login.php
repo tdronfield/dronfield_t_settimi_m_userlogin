@@ -80,3 +80,8 @@ function logout()
 
     redirect_to('admin_login.php');
 }
+
+// user count function 
+function user_count() {
+    $user_count = "SELECT COUNT(`user_id`) FROM `tbl_user` WHERE `user_ip` = 1";
+}
