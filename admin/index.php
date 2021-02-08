@@ -14,5 +14,13 @@ confirm_logged_in(); // Ensures only logged in users can access dashboard page
     <h4>Your last login: <?php echo $_SESSION['user_date']; ?>.</h4>
 
     <a href="admin_logout.php">Log Out</a>
+
+    <div class="widget">
+    <h2>Users</h2>
+    <div class="inner">
+        We currently have <?php echo $user_count; ?> registered users.
+    </div>
+    </div>
+
 </body>
 </html>
