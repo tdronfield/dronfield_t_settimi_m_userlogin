@@ -17,9 +17,9 @@ function login($username, $password, $ip)
     );
 
     // Set time and date BEFORE logging in
-
     // Then update timestamp in DB
 
+    // Error Handle here: if account locked: don't fetch.
     if ($found_user = $user_set->fetch(PDO::FETCH_ASSOC)){
         // Found user, log in!
         // Debugging line only
@@ -28,15 +28,21 @@ function login($username, $password, $ip)
         // Indicate the ID
         $found_user_id = $found_user['user_id'];
 
+        // Indicate lastlogin
+        $_SESSION['user_date'] = $lastlogin;
+
+        // Indicate login attempts
+        $_SESSION['user_login'] = $user_login; 
+
         // Write user and id into session
         $_SESSION['user_id'] = $found_user_id;
         $_SESSION['user_name'] = $found_user['user_fname'];
-
-        // Indicate lastlogin
-        $_SESSION['user_date'] = $lastlogin;
         
         // Write Timestamp into session
         $_SESSION['user_date'] = $found_user['user_date'];
+
+        // Write Login attempts into Session
+        $_SESSION['user_login'] = $found_user['user_login'];
 
         // Update user timestamp 
         $update_user_login_query = 'UPDATE tbl_user SET user_date = CURRENT_TIMESTAMP WHERE user_id=:user_id';
@@ -46,7 +52,6 @@ function login($username, $password, $ip)
                 ':user_id'=>$found_user_id
             )
         );
-
 
         // Update user IP
         $update_user_query = 'UPDATE tbl_user SET user_ip = :user_ip WHERE user_id=:user_id';
@@ -58,12 +63,23 @@ function login($username, $password, $ip)
             )
         );
 
+        // Update Successful Login Attempts
+        $update_login_query = 'UPDATE tbl_user SET user_login = user_login + 1 WHERE user_id=:user_id';
+        $update_login_set = $pdo->prepare($update_login_query);
+        $update_login_set->execute(
+            array(
+                ':user_id'=>$found_user_id
+            )
+        );
+
         // Redirect user back to index.php
         redirect_to('index.php');
 
     } else {
         // Invalid attemp, rejected!
         return "Learn how to type!!";
+
+        // LOG unsuccessful Login 
     }
 }
 
@@ -81,7 +97,3 @@ function logout()
     redirect_to('admin_login.php');
 }
 
-// user count function 
-function user_count() {
-    $user_count = "SELECT COUNT(`user_id`) FROM `tbl_user` WHERE `user_ip` = 1";
-}

@@ -20,7 +20,7 @@ STEPS
     https://webcheatsheet.com/php/blocking_system_access.php
     https://www.youtube.com/watch?v=OY5OxqMI3WA 
 
-6. Research for counting successful logins
+5. Research for counting successful logins
     Implement counting successful logins by...
     - Create new db column to track logins
     - Log in
