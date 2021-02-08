@@ -18,7 +18,7 @@ confirm_logged_in(); // Ensures only logged in users can access dashboard page
     <div class="widget">
     <h2>Users</h2>
     <div class="inner">
-        We currently have <?php echo $user_count; ?> registered users.
+        <h4>You have logged in <?php echo $_SESSION['user_login']; ?> times!</h4>
     </div>
     </div>
 
