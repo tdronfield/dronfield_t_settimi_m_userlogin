@@ -13,10 +13,11 @@ if(isset($_POST['submit'])) {
     if(!empty($username) && !empty($password)) {
         $result = login($username, $password, $ip);
         $message = $result;
-    } else {
+    }  else {
         $message = 'Please fill out required fields';
     }
 }
+
 ?>
 
 <!DOCTYPE html>
