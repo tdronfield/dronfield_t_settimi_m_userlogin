@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2021 at 08:26 PM
+-- Generation Time: Feb 09, 2021 at 09:33 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -35,15 +35,16 @@ CREATE TABLE `tbl_user` (
   `user_email` varchar(250) NOT NULL,
   `user_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `user_ip` varchar(50) NOT NULL,
-  `user_login` tinyint(2) NOT NULL
+  `user_login` tinyint(2) NOT NULL,
+  `failed_attempts` tinyint(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`user_id`, `user_name`, `user_pass`, `user_fname`, `user_email`, `user_date`, `user_ip`, `user_login`) VALUES
-(1, 'Admin', 'admin', 'Taylor', '', '2021-02-08 19:19:01', '::1', 1);
+INSERT INTO `tbl_user` (`user_id`, `user_name`, `user_pass`, `user_fname`, `user_email`, `user_date`, `user_ip`, `user_login`, `failed_attempts`) VALUES
+(1, 'Admin', 'admin', 'Taylor', '', '2021-02-09 20:17:05', '::1', 2, 0);
 
 --
 -- Indexes for dumped tables

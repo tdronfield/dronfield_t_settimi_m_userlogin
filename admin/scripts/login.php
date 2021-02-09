@@ -5,7 +5,7 @@ function login($username, $password, $ip)
     // return 'You are trying to login with U:'.$username.'P:'.$password.'.';
 
     // check against user DB to check credentials
-    // Check if UN and PW match DB
+    // Check if UN and PW match DB  
     $pdo = Database::getInstance()->getConnection();
     $get_user_query = 'SELECT * FROM tbl_user WHERE user_name = :username AND user_pass = :password';
     $user_set = $pdo->prepare($get_user_query);
@@ -20,6 +20,7 @@ function login($username, $password, $ip)
     // Then update timestamp in DB
 
     // Error Handle here: if account locked: don't fetch.
+    // if($found_user['failed_attempts'] < 3){
     if ($found_user = $user_set->fetch(PDO::FETCH_ASSOC)){
         // Found user, log in!
         // Debugging line only
@@ -43,6 +44,9 @@ function login($username, $password, $ip)
 
         // Write Login attempts into Session
         $_SESSION['user_login'] = $found_user['user_login'];
+
+        // Write failed Attempts into session
+        $_SESSION['failed_attempts'] = $found_user['failed_attempts'];
 
         // Update user timestamp 
         $update_user_login_query = 'UPDATE tbl_user SET user_date = CURRENT_TIMESTAMP WHERE user_id=:user_id';
@@ -80,8 +84,17 @@ function login($username, $password, $ip)
         return "Learn how to type!!";
 
         // LOG unsuccessful Login 
+        $update_failed_query = 'UPDATE tbl_user SET failed_attempts = :failedattempts WHERE user_id=:user_id';
+        $update_failed_set = $pdo->prepare($update_failed_query);
+        $update_failed_set->execute(
+            array(
+                ':failedattempts'=>$failed_attempts,
+                ':user_id'=>$found_user_id
+            )
+        );
     }
 }
+//}
 
 function confirm_logged_in()
 {
